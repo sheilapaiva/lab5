@@ -1,10 +1,25 @@
 package lab5;
 
 public class Produto {
+	/**
+	 * nome do produto
+	 */
 	private String nome;
+	/**
+	 * preco do produto
+	 */
 	private double preco;
+	/**
+	 * descricao do produto
+	 */
 	private String descricao;
 	
+	/**
+	 * Construtor do produto
+	 * @param nome : nome do produto
+	 * @param descricao : descricao do produto
+	 * @param preco : preco do produto
+	 */
 	public Produto(String nome, String descricao, double preco) {
 		this.nome = nome;
 		this.preco = preco;
@@ -42,8 +57,19 @@ public class Produto {
 		return true;
 	}
 	
+	/**
+	 * Método que retorna a representação textual dos atributos do produto
+	 */
 	@Override
 	public String toString() {
 		return this.nome + " - " + this.descricao + " - " + this.preco;
+	}
+	
+	/**
+	 * Método altera o preco do produto
+	 * @param preco : preco do produto
+	 */
+	public void setPreco(double preco) {
+		this.preco = preco;
 	}
  }
