@@ -33,8 +33,8 @@ public class ControladorFornecedor {
 	}
 
 	/**
-	 * Método que retorna 
-	 * @param nome
+	 * Método que retorna um determinado fornecedor do mapa de fornecedores
+	 * @param nome : nome do fornecedor
 	 * @return
 	 */
 	public String getFornecedor(String nome) {
