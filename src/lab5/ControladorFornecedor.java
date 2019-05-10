@@ -3,12 +3,12 @@ package lab5;
 import java.util.HashMap;
 
 public class ControladorFornecedor {
-	/*
+	/** 
 	 * Mapa de fornecedores
 	 */
 	public HashMap<String, Fornecedor> fornecedores;
 
-	/*
+	/**
 	 * Construtor do controller que inicializa um mapa de fornecedores
 	 */
 	public ControladorFornecedor() {
@@ -24,8 +24,14 @@ public class ControladorFornecedor {
 	 */
 	public boolean cadastraFornecedor(String nome, String email, String telefone) {
 		if (this.fornecedores.containsKey(nome)) {
-			return false;
-		} else {
+			throw new IllegalAccessError("Erro no cadastro de fornecedor: fornecedor ja existe.");
+		} else if (nome.equals(null) || nome.equals("")) {
+			throw new IllegalArgumentException("Erro no cadastro do fornecedor: nome nao pode ser vazio ou nulo.");
+		} else if (email.equals(null) || email.equals("")) {
+			throw new IllegalArgumentException("Erro no cadastro do fornecedor: email nao pode ser vazio ou nulo.");
+		} else if (telefone.equals(null) || telefone.equals("")) {
+			throw new IllegalArgumentException("Erro no cadastro do fornecedor: telefone nao pode ser vazio ou nulo.");
+		} else {	
 			Fornecedor fornecedor = new Fornecedor(nome, email, telefone);
 			this.fornecedores.put(nome, fornecedor);
 			return true;
@@ -38,6 +44,9 @@ public class ControladorFornecedor {
 	 * @return
 	 */
 	public String getFornecedor(String nome) {
+		if (!this.fornecedores.containsKey(nome)) {
+			throw new IllegalArgumentException("Erro na exibicao do fornecedor: fornecedor nao existe.");
+		}
 		return fornecedores.get(nome).toString();
 	}
 
@@ -56,46 +65,45 @@ public class ControladorFornecedor {
 	}
 
 	/**
-	 * Método que edita o email do fornecedor
+	 * Método que edita atributos do cadastro do fornecedor
 	 * @param nome : nome do fornecedor (chave)
-	 * @param email : email do fornecedor
+	 * @param atributo : atributo que vai ser alterado
+	 * @param novoValor: novo valor pra o atributo
 	 * @return
 	 */
-	public boolean editaEmail(String nome, String email) {
-		if (email.equals(null) || email.trim().equals("")) {
-			return false;
-		}
-		this.fornecedores.get(nome).setEmail(email);
-		return true;
-	}
-
+	
+	public boolean editaCadastroFornecedor(String nome, String atributo, String novoValor) { 
+		if (!atributo.equals("email") || !atributo.equals("telefone")) {
+			throw new IllegalArgumentException("Erro na edicao do fornecedor: atributo nao existe.");
+		} else if(atributo.equals("nome")) {
+			throw new IllegalArgumentException("Erro na edicao do fornecedor: nome nao pode ser editado.");
+		} else if (atributo.equals(null) || atributo.equals("")) {
+			throw new IllegalArgumentException("Erro na edicao do fornecedor: novo valor nao pode ser vazio ou nulo.");
+		} if (atributo.equals("email")) {
+			this.fornecedores.get(nome).setEmail(atributo);
+			return true;
+		} if (atributo.equals("telefone")) {
+			this.fornecedores.get(nome).setTelefone(atributo);
+			return true;
+		} 
+		return false;
+	}	
+	
 	/**
-	 *  Método que edita o telefone do fornecedor
-	 * @param nome : nome do fornecedor (chave)
-	 * @param telefone : telefone do fornecedor
-	 * @return
-	 */
-	public boolean editaTelefone(String nome, String telefone) {
-		if (telefone.equals(null) || telefone.trim().equals("")) {
-			return false;
-		}
-		this.fornecedores.get(nome).setTelefone(telefone);
-		return true;
-	}
-
-	/**
-	 * Métoro que remove o cadastro de um fornecedor do mapa de fornecedores
+	 * Método que remove o cadastro de um fornecedor do mapa de fornecedores
 	 * @param nome
 	 * @return
 	 */
 	public boolean removeCadastroFornecedor(String nome) {
 		if (!this.fornecedores.containsKey(nome)) {
-			return false;
-		} else {
-			this.fornecedores.remove(nome);
-			return true;
+			throw new IllegalArgumentException("Erro na exibicao do fornecedor: fornecedor nao existe.");
+		} else if (nome.equals(null) || nome.equals("")){
+			throw new IllegalArgumentException("Erro na remocao do fornecedor: nome do fornecedor nao pode ser vazio.");
 		}
-	}
+		this.fornecedores.remove(nome);
+		return true;
+		}
+	
 	
 	/**
 	 * Método que cadastra um produto no mapa de produtos de um determinado fornecedor

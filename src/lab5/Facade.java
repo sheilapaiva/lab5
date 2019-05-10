@@ -4,11 +4,11 @@ public class Facade {
 	private ControladorCliente clientes;
 	private ControladorFornecedor fornecedores;
 	
-	public String cadastraCliente(String nome, String email, String localizacao, String cpf) {
-		return this.clientes.cadastraCliente(nome, email, cpf, localizacao);
+	public String adicionaCliente(String cpf, String nome, String email, String localizacao) {
+		return this.clientes.cadastraCliente(cpf, nome, email, localizacao);
 	}
 	
-	public String retornaCliente(String cpf) {
+	public String exibeCliente(String cpf) {
 		return this.clientes.getCliente(cpf);
 	}
 	
@@ -16,23 +16,16 @@ public class Facade {
 		return this.clientes.listaCliente();
 	}
 	
-	public boolean editaEmailCliente(String cpf, String email) {
-		return this.clientes.editaEmail(cpf, email);
+	public boolean editaCliente(String cpf, String atributo, String novoValor) {
+		return this.clientes.editaCliente(cpf, atributo, novoValor);
 	}
 	
-	public boolean editaNomeCliente(String cpf, String nome) {
-		return this.clientes.editaEmail(cpf, nome);
-	}
-	
-	public boolean editaLocalizacaoCliente(String cpf, String localizacao) {
-		return this.clientes.editaEmail(cpf, localizacao);
-	}
 	
 	public boolean removeCliente(String cpf) {
 		return this.clientes.removeCadastroCliente(cpf);
 	}
 	
-	public boolean cadastraFornecedor(String nome, String email, String telefone) {
+	public boolean adicionaFornecedor(String nome, String email, String telefone) {
 		return this.fornecedores.cadastraFornecedor(nome, email, telefone);
 	}
 	
@@ -44,12 +37,8 @@ public class Facade {
 		return this.fornecedores.listaFornecedores();
 	}
 	
-	public boolean editaEmailFornecedor(String nome, String email) {
-		return this.fornecedores.editaEmail(nome, email);
-	}
-	
-	public boolean editaTelefoneFornecedor(String nome, String telefone) {
-		return this.fornecedores.editaEmail(nome, telefone);
+	public boolean editaFornecedor(String nome, String atributo, String novoValor) {
+		return this.fornecedores.editaCadastroFornecedor(nome, atributo, novoValor);
 	}
 	
 	public boolean removeFornecedor(String nome) {
